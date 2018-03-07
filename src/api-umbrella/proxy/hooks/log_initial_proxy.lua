@@ -14,6 +14,8 @@ local function build_log_data()
   -- Fetch all the request and response headers.
   local request_headers = flatten_headers(ngx.req.get_headers());
   local response_headers = flatten_headers(ngx.resp.get_headers());
+  local request_body_str = ngx.var.request_body or ''
+  local response_body_str = ngx.var.resp_body_for_logging or ''
 
   -- Put together the basic log data.
   local id = ngx_var.x_api_umbrella_request_id
@@ -34,6 +36,7 @@ local function build_log_data()
     request_url_port = ngx_var.real_port,
     request_url_scheme = ngx_var.real_scheme,
     request_user_agent = request_headers["user-agent"],
+    request_body = request_body_str,
     response_age = response_headers["age"],
     response_cache = response_headers["x-cache"],
     response_content_encoding = response_headers["content-encoding"],
@@ -43,6 +46,7 @@ local function build_log_data()
     response_size = ngx_var.bytes_sent,
     response_status = ngx_var.status,
     response_transfer_encoding = response_headers["transfer-encoding"],
+    response_body = response_body_str,
     timer_response = sec_to_ms(ngx_var.request_time),
     timestamp_utc = sec_to_ms(ngx_var.msec),
     user_id = ngx_ctx.user_id,

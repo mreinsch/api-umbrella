@@ -13,6 +13,7 @@ luarocks_install(luaposix ${LUAROCK_LUAPOSIX_VERSION} ${LUAROCK_LUAPOSIX_HASH})
 luarocks_install(luatz ${LUAROCK_LUATZ_VERSION} ${LUAROCK_LUATZ_HASH})
 luarocks_install(lustache ${LUAROCK_LUSTACHE_VERSION} ${LUAROCK_LUSTACHE_HASH})
 luarocks_install(lyaml ${LUAROCK_LYAML_VERSION} ${LUAROCK_LYAML_HASH})
+luarocks_install(lua-zlib ${LUAROCK_LZLIB_VERSION} ${LUAROCK_LZLIB_HASH})
 luarocks_install(penlight ${LUAROCK_PENLIGHT_VERSION} ${LUAROCK_PENLIGHT_HASH})
 
 # Other Lua app dependencies (non-luarocks)
@@ -80,6 +81,7 @@ set(
   luarock_luatz
   luarock_lustache
   luarock_lyaml
+  luarock_lua-zlib
   luarock_penlight
 )
 
