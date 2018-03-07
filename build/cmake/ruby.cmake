@@ -24,16 +24,5 @@ ExternalProject_Add(
   CONFIGURE_COMMAND ""
   BUILD_COMMAND ""
   INSTALL_COMMAND env PATH=${STAGE_EMBEDDED_DIR}/bin:$ENV{PATH} gem update --system ${RUBYGEMS_VERSION} --no-document
-)
-
-ExternalProject_Add(
-  bundler
-  DEPENDS rubygems
-  URL https://rubygems.org/downloads/bundler-${BUNDLER_VERSION}.gem
-  URL_HASH SHA256=${BUNDLER_HASH}
-  DOWNLOAD_NO_EXTRACT 1
-  CONFIGURE_COMMAND ""
-  BUILD_COMMAND ""
-  INSTALL_COMMAND env PATH=${STAGE_EMBEDDED_DIR}/bin:$ENV{PATH} gem uninstall bundler --all --executables
-    COMMAND env PATH=${STAGE_EMBEDDED_DIR}/bin:$ENV{PATH} gem install <DOWNLOADED_FILE> --no-document --env-shebang --local
+    COMMAND sed -i "s%^#\!${STAGE_DIR}.*/ruby$%#\!/usr/bin/env ruby%g" ${STAGE_EMBEDDED_DIR}/bin/bundle ${STAGE_EMBEDDED_DIR}/bin/gem ${STAGE_EMBEDDED_DIR}/bin/rake ${STAGE_EMBEDDED_DIR}/bin/update_rubygems
 )
